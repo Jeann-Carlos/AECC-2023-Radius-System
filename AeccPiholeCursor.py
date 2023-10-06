@@ -81,7 +81,7 @@ def GetTable():
 
 
 def CheckUsers(cursor,conn):
-    newly_registered_members = GetTable()
+    newly_registered_members = [L.strip() for L in GetTable()]
     CompareTables(cursor,newly_registered_members)
 
 
@@ -89,18 +89,19 @@ def CheckUsers(cursor,conn):
 def CompareTables(cursor,newly_registered_members):
     cursor.execute('select ip from "client_by_group" join client where client_id=client.id and group_id=1')
     already_registered_members_list = cursor.fetchall()
-    for new_member in newly_registered_members.readlines():
+    for new_member in newly_registered_members:
         if new_member in [ip[0] for ip in already_registered_members_list]:
             print(f"User: {new_member} already registered as a member...Ignoring")
         else:
             cursor.execute(f'select * from client where client.ip="{new_member}"')
             member_data = cursor.fetchall()
-            # check if user already exists in Pihole
+            # check if user already exists in Pihole if pihole doesnt have him there's a problem
             if member_data == []:
                 pass
             else:
                 # add user to registered members
-                 cursor.execute(f'insert into client_by_group values (client_id={new_member[0][0]},group_id=1')
+                 cursor.execute(f'insert into client_by_group (client_id, group_id) values ({new_member[0][0]},1')
+                 cursor.execute(f"DELETE FROM client_by_group WHERE client_id = {new_member[0][0]} AND group_id = 0")
 
 class CloseProgram:
     # user_input = input("Press 'q' to quit: ")
