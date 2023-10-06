@@ -12,34 +12,11 @@ import os
 import sqlite3
 import time
 import schedule
-import asyncio
-
-#Global Variables
-schedule_timer=.10
-
-def StartService():
-
-    try:
-
-        # Schedule the job to run every 5 minutes
-        schedule.every(schedule_timer).minutes.do(DriverProgram)
-
-        # Keep the service running indefinitely
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-
-    except FileNotFoundError as e:
-        print('Database file was not found. Check error below for details:')
-        print(e)
-        return -1
-    except Exception as e:
-        print('Unhandled Exception caught. Check error below for details:')
-        print(e)
-        return -1  # return -1 as a signal error
+import getmac
+from getmac import get_mac_address
 
 
-def ConnectToDb():
+def connectToDb():
 
     # Name of DB
     database_file = "gravity.db"
@@ -59,13 +36,13 @@ def ConnectToDb():
     return cursor, conn
 
 
-def DiscconectFromDb(cursor, conn):
+def discconectFromDb(cursor, conn):
     cursor.close()
     conn.close()
     print('Successfully disconnected...Have a nice day!')
 
 
-def UpdateDb(conn):
+def updateDb(conn):
     try:
         conn.commit()
     except Exception as e:
@@ -75,7 +52,7 @@ def UpdateDb(conn):
 
 
 
-def GetTable():
+def getTable():
     file_path = "Newly_Registered_Members.txt"
 
     # Check if the file exists
@@ -89,29 +66,52 @@ def GetTable():
     # Return the file object
     return open(file_path, 'r')
 
+def addToTable(mac_address):
 
-def DriverProgram():
+    file_path = "Newly_Registered_Members.txt"
 
-    # Start by connecting to Db
-    cursor, conn = ConnectToDb()
+    # Check if the file exists
+    table_exists = os.path.isfile(file_path)
 
-    # Get new users that paid
-    newly_registered_members = [L.strip() for L in GetTable()]
+    # If the file does exist, add mac address
+    if table_exists:
+        with open(file_path, 'w') as file:
+            file.write(f"{mac_address}\n")
+    else:
+        pass
 
-    # Compare users that paid with the registered tables in gravity db
-    CompareTables(cursor, newly_registered_members)
+def driverProgram():
 
-    # Commit changes
-    UpdateDb(conn)
+    try:
+        # Start by connecting to Db
+        cursor, conn = connectToDb()
 
-    # Disconnect from DB
-    DiscconectFromDb(cursor, conn)
+        # Get new users that paid
+        newly_registered_members = [L.strip() for L in getTable()]
 
-    # Notify user that is safe to close program now
+        # Compare users that paid with the registered tables in gravity db
+        compareTables(cursor, newly_registered_members)
+
+        # Commit changes
+        updateDb(conn)
+
+        # Disconnect from DB
+        discconectFromDb(cursor, conn)
+
+        # Notify user that is safe to close program now
+
+    except FileNotFoundError as e:
+        print('Database file was not found. Check error below for details:')
+        print(e)
+        return -1
+    except Exception as e:
+        print('Unhandled Exception caught. Check error below for details:')
+        print(e)
+        return -1  # return -1 as a signal error
 
 
 
-def CompareTables(cursor, newly_registered_members):
+def compareTables(cursor, newly_registered_members):
 
     # Select all registered members
     cursor.execute('select ip from "client_by_group" join client where client_id=client.id and group_id=1')
@@ -134,5 +134,18 @@ def CompareTables(cursor, newly_registered_members):
                 cursor.execute(f"DELETE FROM client_by_group WHERE client_id = {member_data[0][0]} AND group_id = 0")
 
 
-exit_value = StartService()
+def getMac():
+    ip_address = "192.168.0.236"  # Replace to receive from flask
+
+    mac_address = get_mac_address(ip=ip_address)
+
+    if mac_address is None:
+        print("MAC address not found")
+    else:
+        print(f"Recieved: {mac_address} from flask")
+
+
+
+#getMac()
+exit_value = driverProgram()
 exit(exit_value)
