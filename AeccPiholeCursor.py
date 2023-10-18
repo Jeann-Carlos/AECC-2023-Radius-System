@@ -10,9 +10,6 @@ Last Updated: October 6, 2023
 
 import os
 import sqlite3
-import time
-import schedule
-import getmac
 from getmac import get_mac_address
 
 
@@ -135,7 +132,7 @@ def compareTables(cursor, newly_registered_members):
 
 
 def getMac():
-    ip_address = "192.168.0.236"  # Replace to receive from flask
+    ip_address = "192.168.1.232"  # Replace to receive from flask
 
     mac_address = get_mac_address(ip=ip_address)
 
