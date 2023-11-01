@@ -43,44 +43,48 @@
 <body>
     <!--Navigation Bar  -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="index.html" style="padding: .45em;">
-                    <img src="images/aecc-logo.png" alt="Logo AECC"
-                         style="width:1.8em;height:1.8em;border:0.1em solid #aaaaaa; border-radius: 0.3em;
-                                 display: inline; margin: 0em 0.2em 0.2em 0em; " />AECC@UPRRP</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li> <a href="/index.html">Home</a> </li>
-                    <li> <a href="about.html">About us</a> </li>
-                    <!--- Commenting out services from the nav bar for now
-                    <li>
-                        <a href="services.html">Services</a>
-                    </li> -->
-                    <li> <a href="contact.html">Contact us</a> </li>
-                    <li> <a href="portfolio.html">Our Portfolio</a> </li>
-                    <li> <a href="blog.html">Announcements</a> </li>
-                    <li> <a href="activities.html">Activities</a> </li>
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li> <a href="https://www.facebook.com/aeccupr/">Our Facebook Page</a> </li>
-                            <li> <a href="https://www.facebook.com/includeGirls/">Include Girls UPRRP's FB page</a> </li>
-                            <li> <a href="faq.html">FAQ</a> </li>
-                            <li> <a href="pricing.html">Store</a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('index') }}" style="padding: .45em;">
+                <img src="{{ url_for('static', filename='images/aecc-logo.png') }}" alt="Logo AECC"
+                    style="width:1.8em;height:1.8em;border:0.1em solid #aaaaaa; border-radius: 0.3em;
+                            display: inline; margin: 0em 0.2em 0.2em 0em; " />AECC@UPRRP</a>
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About us</a></li>
+                <!--- Commenting out services from the nav bar for now
+                <li>
+                    <a href="{{ url_for('services') }}">Services</a>
+                </li> -->
+                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Our Portfolio</a></li>
+                <li><a href="{{ url_for('blog') }}">Announcements</a></li>
+                <li><a href="{{ url_for('activities') }}">Activities</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.facebook.com/aeccupr/">Our Facebook Page</a></li>
+                        <li><a href="https://www.facebook.com/includeGirls/">Include Girls UPRRP's FB page</a></li>
+                        <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+                        <li><a href="{{ url_for('pricing') }}">Store</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
     <!-- Header Carousel -->
     <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
@@ -111,7 +115,7 @@
         </div>
     </div>
     <div class="item">
-        <div class="fill" style="background-image:url('{{ url_for('static', filename='images/unity-1.jpg') }}'); padding-bottom: 55%;"></div>
+        <div class="fill" style=" background-image:url('{{ url_for('static', filename='images/unity-1.jpg') }}'); padding-bottom: 55%;"></div>
         <div class="carousel-caption">
             <h2 style="color: #EFF; text-shadow: 0.5em 0.5em 0.5em #111">Full House at the Unity VR Workshop!</h2>
         </div>
@@ -128,44 +132,55 @@
     <!-- Page Content -->
     <div class="container">
         <!-- Welcome message -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    The 2019-20's AECC (Asociación Estudiantil de Ciencia de Cómputos) welcomes you to its official landing page.<br>
-                    <small><em>Here you can learn more about our plans for the 2019-20 academic year.</em></small>
-                </h1> </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-compass"></i> Conferences </h4> </div>
-                    <div class="panel-body">
-                        <p class="text-justify">Throughout the year the AECC works hard to bring the best conferences to our students, our university, and the general public. We encourage you to either sponsor or participate in one of these talks. Our conferences focus on helping our members get ahead by preparing you for what is ahead during your academic and professional career by covering topics and technologies that aren't covered in class and are useful to any future computer scientist.
-                            <!-- To get ahead and view the different topics that will be covered during the conferences this year click the "See Conferences" button below. -->
-                        </p>
-                    </div>
-                </div>
+       <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            The 2019-20's AECC (Asociación Estudiantil de Ciencia de Cómputos) welcomes you to its official landing page.<br>
+            <small><em>Here you can learn more about our plans for the 2019-20 academic year.</em></small>
+        </h1>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-compass"></i> Conferences</h4>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-file-code-o"></i> Workshops </h4> </div>
-                    <div class="panel-body">
-                        <p class="text-justify">We believe that providing our members with a hands-on experience is the best way to help them get prepared for their future as a professional in the many fields a degree in Computer Science offers to them. It is for this reason that we invite you to save the date early on and never miss one of our Workshops. Our Workshops cover a broad range of topics in the field so there's something for everyone.
-                            <!-- To get ahead and view the different topics that will be covered during the workshops this year click the "See Workshops" button below. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-coffee"></i> Activities </h4> </div>
-                    <div class="panel-body">
-                        <p class="text-justify">It is very important for us to network and interact in as many different ways as possible. You know, outside of the classroom where we can share new, different and interesting ideas, and just get to know new people. Also, if you have a project you're working on and would like to present it to others to get some feedback and maybe get others to join, just let us know. We want to foster a strong sense of community in our members because we believe it is a vital trait inside and outside the classroom.</p>
-                    </div>
-                </div>
+            <div class="panel-body">
+                <p class="text-justify">
+                    Throughout the year, the AECC works hard to bring the best conferences to our students, our university, and the general public. We encourage you to either sponsor or participate in one of these talks. Our conferences focus on helping our members get ahead by preparing you for what is ahead during your academic and professional career by covering topics and technologies that aren't covered in class and are useful to any future computer scientist.
+                    <!-- To get ahead and view the different topics that will be covered during the conferences this year click the "See Conferences" button below. -->
+                </p>
+                <a href="URL_OF_CONFERENCES_PAGE" class="btn btn-primary">See Conferences</a>
             </div>
         </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-file-code-o"></i> Workshops</h4>
+            </div>
+            <div class="panel-body">
+                <p class="text-justify">
+                    We believe that providing our members with a hands-on experience is the best way to help them get prepared for their future as a professional in the many fields a degree in Computer Science offers to them. It is for this reason that we invite you to save the date early on and never miss one of our Workshops. Our Workshops cover a broad range of topics in the field, so there's something for everyone.
+                    <!-- To get ahead and view the different topics that will be covered during the workshops this year click the "See Workshops" button below. -->
+                </p>
+                <a href="URL_OF_WORKSHOPS_PAGE" class="btn btn-primary">See Workshops</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-coffee"></i> Activities</h4>
+            </div>
+            <div class="panel-body">
+                <p class="text-justify">
+                    It is very important for us to network and interact in as many different ways as possible. You know, outside of the classroom where we can share new, different, and interesting ideas, and just get to know new people. Also, if you have a project you're working on and would like to present it to others to get some feedback and maybe get others to join, just let us know. We want to foster a strong sense of community in our members because we believe it is a vital trait inside and outside the classroom.
+                </p>
+                <a href="URL_OF_ACTIVITIES_PAGE" class="btn btn-primary">See Activities</a>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- /.row -->
         <!-- What we do section. we need better pics. gif is not exactly light. wish webm was more universal. will find alternative -->
       <div class="row">
@@ -210,60 +225,66 @@
         <hr>
         <!-- Signup and donation buttons.  -->
         <div class="well">
-            <div class="row">
-                <div class="col-md-8">
-                    <br>
-                    <p class="text-justify">Want to join? <strong>Become a member of the AECC.</strong></p>
-                </div>
-                <div class="col-md-4"> <a class="btn btn-lg btn-primary btn-block" href="/signup.html"> Join! </a> </div>
-                <!--  This is currently breaks alignment and is kind of redundant since it is covered in the FAQ
-                <div class="col-md-8">
-                    <p class="text-justify"> We recommend you learn more about the ACM! </p>
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-lg btn-default btn-block" href="http://ccom.uprrp.edu/~acm/">Learn More about the ACM!</a>
-                </div>
-                -->
-                <div style="height:5%"> </div>
-                <div class="col-md-8">
-                    <p class="text-justify">You may also <strong>become a member of the ACM</strong>, which grants you
-                        an AECC membership. We recommend you learn more from
-                        <a href="http://www.acm.org/about-acm/about-the-acm-organization" target="_blank">
-                        <strong>the ACM's site</strong></a> or from
-                        <a href="https://aecc-uprrp.github.io/faq.html"><strong>our FAQ.</strong></a>
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-lg btn-primary btn-block" href="https://campus.acm.org/public/qj/quickjoin/qj_control.cfm?promo=PWEBTOP&form_type=Student"> Join ACM and AECC! </a> </div>
-                <div class="col-md-8">
-                    <p class="text-justify">If you have any questions about us or our memberships check our our
-                        <a href="./faq.html">FAQ</a>, <a href=""></a></p>
-                </div>
-                <div class="col-md-4"> <a class="btn btn-lg btn-default btn-block" href="/donate.html">Sponsor or Donate</a> </div>
-            </div>
+    <div class="row">
+        <div class="col-md-8">
+            <br>
+            <p class="text-justify">Want to join? <strong>Become a member of the AECC.</strong></p>
         </div>
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; AECC-UPRRP 2018
-                        <br>Using The Modern Business template by Start Bootstrap</p>
-                </div>
-            </div>
-        </footer>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-primary btn-block" href="{{ url_for('signup') }}">Join!</a>
+        </div>
+        <div style="height:5%"></div>
+        <div class="col-md-8">
+            <p class="text-justify">
+                You may also <strong>become a member of the ACM</strong>, which grants you an AECC membership.
+                We recommend you learn more from
+                <a href="http://www.acm.org/about-acm/about-the-acm-organization" target="_blank">
+                    <strong>the ACM's site</strong>
+                </a> or from
+                <a href="https://aecc-uprrp.github.io/faq.html">
+                    <strong>our FAQ.</strong>
+                </a>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-primary btn-block" href="https://campus.acm.org/public/qj/quickjoin/qj_control.cfm?promo=PWEBTOP&form_type=Student">Join ACM and AECC!</a>
+        </div>
+        <div class="col-md-8">
+            <p class="text-justify">
+                If you have any questions about us or our memberships, check out our
+                <a href="{{ url_for('faq') }}">FAQ</a>.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-default btn-block" href="{{ url_for('donate') }}">Sponsor or Donate</a>
+        </div>
     </div>
-    <!-- /.container -->
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Script to Activate the Carousel -->
-    <script>
-        $('.carousel').carousel({
-            interval: 10000 //changes the speed
-        })
-    </script>
+</div>
+<hr>
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                Copyright &copy; AECC-UPRRP 2018
+                <br>
+                Using The Modern Business template by Start Bootstrap
+            </p>
+        </div>
+    </div>
+</footer>
+</div>
+<!-- /.container -->
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Script to Activate the Carousel -->
+<script>
+    $('.carousel').carousel({
+        interval: 10000 //changes the speed
+    })
+</script>
 </body>
 
 </html>

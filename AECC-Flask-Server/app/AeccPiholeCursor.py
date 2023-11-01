@@ -50,7 +50,7 @@ def updateDb(conn):
 
 
 def getTable():
-    file_path = "Newly_Registered_Members.txt"
+    file_path = "../../Newly_Registered_Members.txt"
 
     # Check if the file exists
     table_exists = os.path.isfile(file_path)
@@ -65,7 +65,7 @@ def getTable():
 
 def addToTable(mac_address):
 
-    file_path = "Newly_Registered_Members.txt"
+    file_path = "../../Newly_Registered_Members.txt"
 
     # Check if the file exists
     table_exists = os.path.isfile(file_path)
@@ -131,18 +131,12 @@ def compareTables(cursor, newly_registered_members):
                 cursor.execute(f"DELETE FROM client_by_group WHERE client_id = {member_data[0][0]} AND group_id = 0")
 
 
-def getMac():
-    ip_address = "192.168.1.232"  # Replace to receive from flask
-
+def getMac(ip_address):
     mac_address = get_mac_address(ip=ip_address)
 
     if mac_address is None:
         print("MAC address not found")
+        return -1
     else:
         print(f"Recieved: {mac_address} from flask")
-
-
-
-#getMac()
-exit_value = driverProgram()
-exit(exit_value)
+        return mac_address
