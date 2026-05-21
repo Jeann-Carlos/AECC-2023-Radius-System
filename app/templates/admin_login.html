@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Access{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card form-card" style="max-width: 420px; margin: 6rem auto;">
+        <h2>Administrative Login</h2>
+        <p class="subtitle">Enter credentials to open the Network Cockpit.</p>
+
+        {% if error %}
+        <div class="error-banner">
+            <i class="fa fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('admin.login') }}">
+            <div class="form-group">
+                <label for="username">Administrator Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" class="form-input" required autocomplete="off">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label for="password">Security Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" class="form-input" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa fa-sign-in"></i> Access Dashboard</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

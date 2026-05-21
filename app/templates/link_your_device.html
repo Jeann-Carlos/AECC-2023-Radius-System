@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Link Your Device{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card form-card">
+        <h2>Link Device to Network</h2>
+        <p class="subtitle">Securely authenticate your device MAC address to gain full RADIUS network permissions.</p>
+
+        {% if error %}
+        <div class="error-banner">
+            <i class="fa fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success_data %}
+        <div class="success-banner">
+            <i class="fa fa-check-circle" style="font-size: 2.5rem; margin-bottom: 0.5rem; display: block;"></i>
+            <strong>Device Linked Successfully!</strong>
+            <p style="font-size: 0.9rem; margin-top: 0.4rem; color: var(--text-secondary);">
+                Your hardware MAC address is now registered in the RADIUS & Pi-hole database directory.
+            </p>
+            
+            <div class="success-details">
+                <div>
+                    <span>Student ID:</span>
+                    <strong>{{ success_data.student_id }}</strong>
+                </div>
+                <div>
+                    <span>MAC Address:</span>
+                    <strong style="color: var(--primary);">{{ success_data.mac_address }}</strong>
+                </div>
+                <div>
+                    <span>Connection IP:</span>
+                    <strong>{{ success_data.ip_address }}</strong>
+                </div>
+                <div>
+                    <span>Network Group:</span>
+                    <span class="badge badge-active">{{ success_data.status }}</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ url_for('main.index') }}" class="btn btn-secondary"><i class="fa fa-home"></i> Back to Home</a>
+            </div>
+        </div>
+        {% else %}
+        
+        <form method="POST" action="{{ url_for('auth.link_your_device') }}">
+            <div class="form-group">
+                <label for="student_id">Student ID (e.g. 802123456)</label>
+                <input type="text" id="student_id" name="student_id" placeholder="Enter student identifier" class="form-input" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Telephone Number (e.g. 7875551234)</label>
+                <input type="text" id="telephone" name="telephone" placeholder="Enter phone number" class="form-input" required autocomplete="off">
+            </div>
+
+            <div class="form-group" style="background: var(--bg-input); padding: 0.8rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+                <span style="font-size: 0.85rem; color: var(--text-secondary);"><i class="fa fa-info-circle"></i> Detected Client IP:</span>
+                <code style="color: var(--secondary); font-weight: 600; font-size: 0.95rem;">{{ client_ip }}</code>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa fa-wifi"></i> Authenticate & Authorize Device</button>
+        </form>
+        
+        <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+            Note: This portal utilizes ARP lookups to dynamically identify your device's MAC address based on your network route.
+        </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

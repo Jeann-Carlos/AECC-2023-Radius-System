@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Announcements{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <h1 style="font-size: 2.6rem; text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+        Announcements & Blog
+    </h1>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        
+        <div class="card">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Posted on May 20, 2026 by Directiva AECC</span>
+            <h3 style="margin-top: 0.5rem; margin-bottom: 1rem; color: var(--primary);">Annual General Assembly Scheduled</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                Our annual board elections and budget reviews are scheduled for next Friday in the department auditorium. Register to vote. Food and refreshments will be provided.
+            </p>
+            <a href="#" class="btn btn-secondary btn-sm" style="display: inline-flex; width: fit-content;">Read Full Article</a>
+        </div>
+
+        <div class="card">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Posted on May 15, 2026 by Directiva AECC</span>
+            <h3 style="margin-top: 0.5rem; margin-bottom: 1rem;">RADIUS Server Database Migrations Complete</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+                We have finalized the database updates for device validation. The new self-service dashboard simplifies MAC address mapping, improving captive portal routing response.
+            </p>
+            <a href="#" class="btn btn-secondary btn-sm" style="display: inline-flex; width: fit-content;">Read Full Article</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

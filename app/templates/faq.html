@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ - Frequently Asked Questions{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <h1 style="font-size: 2.6rem; text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+        Frequently Asked Questions
+    </h1>
+    
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 0.8rem;"><i class="fa fa-question-circle"></i> What is the AECC RADIUS System?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+                The RADIUS system controls student device authentication for our local private student network. It ensures that only validated student organization members can route internet traffic, utilizing MAC address validation.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 0.8rem;"><i class="fa fa-question-circle"></i> How do I register my device?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+                Go to the <a href="{{ url_for('auth.link_your_device') }}">Link Device</a> portal, input your registered Student ID and telephone number, and the portal will automatically detect your device's MAC address and authorize it in the RADIUS databases.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 0.8rem;"><i class="fa fa-question-circle"></i> Why is my device MAC address blocked?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+                Devices can be administratively sandboxed / blocked due to expired memberships or network policy violations. If you suspect an error, visit the Computer Science department lab or contact an admin.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 0.8rem;"><i class="fa fa-question-circle"></i> What are the network policies?</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+                Members get high-speed internet permissions. Default guests are redirected to validation. Sandboxed units are restricted to DNS/routing blocks to safeguard intranet environments.
+            </p>
+        </div>
+        
+    </div>
+
+    <div style="margin-top: 3rem; text-align: center;">
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Home</a>
+    </div>
+</div>
+{% endblock %}

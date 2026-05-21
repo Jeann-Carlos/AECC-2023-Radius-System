@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <div class="card" style="margin-top: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Our Services</h1>
+        <p style="color: var(--text-secondary); line-height: 1.8; text-align: center; margin-bottom: 2.5rem;">
+            AECC provides academic and network utility systems to members and computer science undergraduates.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fa fa-book"></i> Peer Tutoring</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Free academic support for introductory programming (Python, C++), data structures, discrete mathematics, and software design patterns. Available daily.
+                </p>
+            </div>
+
+            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+                <h3 style="color: var(--secondary); margin-bottom: 0.5rem;"><i class="fa fa-wifi"></i> Private Member Intranet</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Secure, ad-free student wireless network utilizing RADIUS/Pi-hole directory configuration. Prevents external trackers and sandbox-blocks unauthenticated nodes.
+                </p>
+            </div>
+
+            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+                <h3 style="color: var(--warning); margin-bottom: 0.5rem;"><i class="fa fa-server"></i> Sandbox Project Hosting</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Deploy web apps, API prototypes, or database schemas directly on our student-run server arrays. Available for project courses and hackathons.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

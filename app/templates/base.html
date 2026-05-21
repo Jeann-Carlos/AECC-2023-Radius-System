@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AECC RADIUS Network Portal - UPRRP Association of Computer Science Students">
+    <title>AECC Network - {% block title %}Home{% endblock %}</title>
+    
+    <!-- Premium Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Dynamic Decorative Glows -->
+    <div class="glow-background">
+        <div class="glow-circle glow-1"></div>
+        <div class="glow-circle glow-2"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="{{ url_for('main.index') }}" class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/aecc-logo.png') }}" alt="AECC Logo" class="navbar-logo">
+            AECC@UPRRP
+        </a>
+        <ul class="nav-menu">
+            <li><a href="{{ url_for('main.index') }}" class="nav-link">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}" class="nav-link">About Us</a></li>
+            <li><a href="{{ url_for('main.activities') }}" class="nav-link">Activities</a></li>
+            <li><a href="{{ url_for('main.faq') }}" class="nav-link">FAQ</a></li>
+            <li><a href="{{ url_for('main.pricing') }}" class="nav-link">Store</a></li>
+            <li><a href="{{ url_for('auth.link_your_device') }}" class="nav-btn"><i class="fa fa-wifi"></i> Link Device</a></li>
+            <li><a href="{{ url_for('admin.dashboard') }}" class="nav-link"><i class="fa fa-cogs"></i> Admin</a></li>
+        </ul>
+        <div class="mobile-toggle">
+            <i class="fa fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Copyright &copy; AECC-UPRRP 2026</p>
+        <p style="font-size: 0.75rem; color: var(--text-muted);">
+            RADIUS & Network Management Control System designed from the ground up for UPR Rio Piedras.
+        </p>
+    </footer>
+
+    <!-- Global App Script -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

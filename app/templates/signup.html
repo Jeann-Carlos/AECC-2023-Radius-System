@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up / Join{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px;">
+    <div class="card" style="margin-top: 3rem; text-align: center; padding: 3rem 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;"><i class="fa fa-user-plus" style="color: var(--primary);"></i> Join the AECC</h1>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem; font-size: 1.05rem;">
+            Ready to jumpstart your career in tech, connect with peer coders, and gain access to the private network? Follow the steps below to complete your registration.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; margin-bottom: 3rem;">
+            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Step 1: Direct AECC Entry</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                    Visit our direct registry or talk to our board members. Complete the membership payment of $15.00 to activate your profile immediately in the student sheets database.
+                </p>
+            </div>
+
+            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color);">
+                <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Step 2: ACM Joint Membership</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                    Alternatively, sign up directly through the ACM National Student Portal. A national membership ($25) automatically includes free local AECC membership credentials.
+                </p>
+            </div>
+        </div>
+
+        <div class="btn-group" style="justify-content: center;">
+            <a href="https://campus.acm.org/public/qj/quickjoin/qj_control.cfm?promo=PWEBTOP&form_type=Student" target="_blank" class="btn btn-primary">Join via ACM QuickJoin</a>
+            <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

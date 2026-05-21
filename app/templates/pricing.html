@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Store - Merch{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="font-size: 2.6rem; text-align: center; margin-top: 2rem; margin-bottom: 0.5rem;">
+        AECC Store & Merch
+    </h1>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+        Sponsor our students and wear official AECC gear. All proceeds fund workshop equipment and hackathon trips.
+    </p>
+    
+    <div class="features-grid">
+        
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2.5rem 2rem;">
+            <div>
+                <span style="background: var(--primary-glow); color: var(--primary); font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; text-transform: uppercase;">Apparel</span>
+                <h3 style="font-size: 1.8rem; margin-top: 1rem; margin-bottom: 0.5rem;">AECC T-Shirt</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    Official 2025/2026 dark mode custom cotton tee featuring our retro binary logo print.
+                </p>
+            </div>
+            <div>
+                <div style="font-size: 2.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1.5rem;">$15.00</div>
+                <button class="btn btn-primary" style="width: 100%;"><i class="fa fa-shopping-cart"></i> Purchase Item</button>
+            </div>
+        </div>
+
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2.5rem 2rem; border-color: var(--secondary);">
+            <div>
+                <span style="background: var(--secondary-glow); color: var(--secondary); font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; text-transform: uppercase;">Premium Bundle</span>
+                <h3 style="font-size: 1.8rem; margin-top: 1rem; margin-bottom: 0.5rem;">Sticker & Keycap Pack</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    Premium vinyl tech stickers and 3D printed mechanical keyboard escape keys.
+                </p>
+            </div>
+            <div>
+                <div style="font-size: 2.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1.5rem;">$8.00</div>
+                <button class="btn btn-primary" style="width: 100%; background: var(--secondary); border-color: var(--secondary);"><i class="fa fa-shopping-cart"></i> Purchase Pack</button>
+            </div>
+        </div>
+
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 2.5rem 2rem;">
+            <div>
+                <span style="background: rgba(240, 170, 0, 0.15); color: var(--warning); font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; text-transform: uppercase;">Membership</span>
+                <h3 style="font-size: 1.8rem; margin-top: 1rem; margin-bottom: 0.5rem;">AECC + ACM Annual</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    Full annual student organization membership credentials, access cards, and local/national ACM discounts.
+                </p>
+            </div>
+            <div>
+                <div style="font-size: 2.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1.5rem;">$25.00</div>
+                <button class="btn btn-primary" style="width: 100%;"><i class="fa fa-credit-card"></i> Subscribe</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

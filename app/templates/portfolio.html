@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Portfolio{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 950px;">
+    <h1 style="font-size: 2.6rem; text-align: center; margin-top: 2rem; margin-bottom: 0.5rem;">
+        Student Projects Portfolio
+    </h1>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+        Open source projects, web applications, and physical hardware interfaces engineered by AECC members.
+    </p>
+
+    <div class="features-grid">
+        
+        <div class="card">
+            <h3 style="color: var(--primary);"><i class="fa fa-github"></i> RADIUS Self-Service Portal</h3>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.2rem; margin-bottom: 0.8rem;">Flask + SQLite + FreeRADIUS</span>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                The very system you are currently navigating! Decouples student database records and translates validations into compliant database rules.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--secondary);"><i class="fa fa-gamepad"></i> VR Department Tour</h3>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.2rem; margin-bottom: 0.8rem;">Unity + Oculus SDK</span>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                A virtual reality department walk-through designed during VR workshops to guide high school pre-engineering orientations.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--warning);"><i class="fa fa-thermometer-half"></i> IoT Lab Monitor</h3>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.2rem; margin-bottom: 0.8rem;">Raspberry Pi + C++</span>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                An internet-of-things temperature and humidity watchdog alerting lab stewards when department server racks overheat.
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

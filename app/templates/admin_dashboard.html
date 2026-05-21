@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1300px;">
+    
+    <!-- Header Controls -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h1 style="font-size: 2.4rem;">Network Cockpit</h1>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                Manage RADIUS authentications, client database, and Pi-hole group access policies.
+            </p>
+        </div>
+        <div style="display: flex; gap: 0.8rem;">
+            <button class="btn btn-secondary" id="legacy-sync-btn">
+                <i class="fa fa-refresh"></i> Sync Legacy List
+            </button>
+            <a href="{{ url_for('admin.logout') }}" class="btn btn-secondary" style="border-color: var(--danger); color: var(--danger);">
+                <i class="fa fa-sign-out"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Dev Mode Indicator banner -->
+    {% if mock_mode %}
+    <div class="success-banner" style="background: rgba(0, 150, 255, 0.1); border-left: 5px solid var(--secondary); color: var(--text-primary); text-align: left; padding: 1rem 1.5rem; margin-bottom: 2rem;">
+        <i class="fa fa-info-circle" style="color: var(--secondary); font-size: 1.2rem; margin-right: 0.5rem; vertical-align: middle;"></i>
+        <strong>Local Development / Simulation Mode:</strong> Real Pi-hole DB or Google API keys are missing. The server is operating on dynamic mock tables inside local <code style="background: rgba(0,0,0,0.3); padding: 0.1rem 0.3rem; border-radius: 3px;">radius.db</code> and <code style="background: rgba(0,0,0,0.3); padding: 0.1rem 0.3rem; border-radius: 3px;">gravity.db</code> databases.
+    </div>
+    {% endif %}
+
+    <!-- Stats Cards Grid -->
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <div class="stat-icon icon-teal">
+                <i class="fa fa-hdd-o"></i>
+            </div>
+            <div class="stat-details">
+                <h3 id="stat-total-devices">{{ stats.total_devices }}</h3>
+                <p>Registered</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon icon-success">
+                <i class="fa fa-wifi"></i>
+            </div>
+            <div class="stat-details">
+                <h3 id="stat-active-devices">{{ stats.active_devices }}</h3>
+                <p>Authorized</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon icon-blue">
+                <i class="fa fa-sign-in"></i>
+            </div>
+            <div class="stat-details">
+                <h3 id="stat-active-sessions">{{ stats.active_sessions }}</h3>
+                <p>Active Sessions</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon icon-danger">
+                <i class="fa fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-details">
+                <h3 id="stat-auth-failures">{{ stats.auth_failures }}</h3>
+                <p>Auth Reject Logs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div style="border-bottom: 1px solid var(--border-color); display: flex; gap: 1.5rem; margin-bottom: 2rem;">
+        <a href="#" class="nav-link dashboard-tab active" data-target="overview-section" style="padding-bottom: 0.8rem; font-weight: 600;">
+            <i class="fa fa-bar-chart"></i> Overview
+        </a>
+        <a href="#" class="nav-link dashboard-tab" data-target="devices-section" style="padding-bottom: 0.8rem; font-weight: 600;">
+            <i class="fa fa-list"></i> Device Directory
+        </a>
+        <a href="#" class="nav-link dashboard-tab" data-target="logs-section" style="padding-bottom: 0.8rem; font-weight: 600;">
+            <i class="fa fa-terminal"></i> RADIUS Logs
+        </a>
+    </div>
+
+    <!-- Tab Section: Overview -->
+    <div id="overview-section" class="dashboard-section">
+        <div class="dashboard-row">
+            <!-- Traffic Analytics Chart -->
+            <div class="card">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fa fa-area-chart"></i> System Resource Analytics</h3>
+                <div class="chart-container">
+                    <canvas id="devicesChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Manual Registration Card -->
+            <div class="card">
+                <h3 style="margin-bottom: 1.2rem;"><i class="fa fa-plus-circle"></i> Quick Register Client</h3>
+                <form id="add-device-form">
+                    <div class="form-group">
+                        <label for="add-student-id">Student ID</label>
+                        <input type="text" id="add-student-id" placeholder="802111222" class="form-input" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-telephone">Telephone</label>
+                        <input type="text" id="add-telephone" placeholder="7875551234" class="form-input" required autocomplete="off">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="add-mac">MAC Address</label>
+                        <input type="text" id="add-mac" placeholder="AA:BB:CC:DD:EE:01" class="form-input" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa fa-plus"></i> Register Device</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Section: Device Directory -->
+    <div id="devices-section" class="dashboard-section" style="display: none;">
+        <div class="card">
+            <!-- Filters Toolbar -->
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px; position: relative;">
+                    <input type="text" id="device-search" placeholder="Search devices by Student ID, MAC, IP or Phone..." class="form-input" style="padding-left: 2.5rem;">
+                    <i class="fa fa-search" style="position: absolute; left: 1rem; top: 1rem; color: var(--text-muted);"></i>
+                </div>
+                <div style="min-width: 180px;">
+                    <select id="status-filter" class="form-input">
+                        <option value="all">Filter Status: All</option>
+                        <option value="Active">Authorized (Active)</option>
+                        <option value="Blocked">Blocked / Sandbox</option>
+                        <option value="Pending">Pending Validation</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Devices Table -->
+            <div class="table-wrapper">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>MAC Address</th>
+                            <th>IP Address</th>
+                            <th>Telephone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devices-table-body">
+                        <!-- Injected dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Section: Logs -->
+    <div id="logs-section" class="dashboard-section" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <!-- Authentication Logs -->
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;"><i class="fa fa-shield"></i> RADIUS Auth Requests (radpostauth)</h3>
+                <div class="log-terminal" id="log-terminal-auth">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+            
+            <!-- Connection Accounting Logs -->
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;"><i class="fa fa-exchange"></i> RADIUS Accounting Sessions (radacct)</h3>
+                <div class="log-terminal" id="log-terminal-acct" style="color: #6f9;">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Chart.js and Dashboard Controller -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

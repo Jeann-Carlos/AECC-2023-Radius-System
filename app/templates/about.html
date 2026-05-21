@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <div class="card" style="margin-top: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;">
+            About AECC
+        </h1>
+        
+        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            The <strong>Asociación Estudiantil de Ciencias de Cómputos (AECC)</strong> is a student-led organization at the University of Puerto Rico, Río Piedras Campus (UPRRP). Established to represent computer science students, the organization works towards fostering a community of collaborative coding, hosting workshops, and providing tutoring services.
+        </p>
+
+        <h2 style="margin-top: 2.5rem; margin-bottom: 1rem;">Our Mission</h2>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+            To prepare students for professional careers in computing disciplines by hosting technical seminars, networking events, coding bootcamps, and providing resources to excel academically and technically.
+        </p>
+
+        <h2 style="margin-top: 2.5rem; margin-bottom: 1rem;">Our History</h2>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+            For years, the AECC has been the hub of innovation in the Computer Science department. From sending students to local hackathons (like HackPR) to conducting specialized research talks and building open-source projects, our members actively shape the technical landscape of UPRRP.
+        </p>
+
+        <div style="margin-top: 3rem; text-align: center;">
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

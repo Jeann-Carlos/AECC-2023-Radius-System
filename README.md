@@ -1,35 +1,87 @@
-# AECC-2023-Radius-System
+# AECC RADIUS & Network Management System
 
-This repository contains a private radius network system that will be connected to Flask for the "AECC" (Asociación Estudiantil de Ciencias de Computos).
+This repository contains the restructured, premium web portal and network authentication system for the **Asociación Estudiantil de Ciencias de Cómputos (AECC)** at the University of Puerto Rico, Río Piedras Campus (UPRRP).
 
-## Description
+The system integrates a modern public website, a self-service student MAC-address linking portal, and a high-fidelity administrative cockpit with standard FreeRADIUS and Pi-hole databases.
 
-The AECC-2023-Radius-System is a private network system designed to provide secure authentication, authorization, and accounting services for network access. It utilizes the RADIUS (Remote Authentication Dial-In User Service) protocol, which allows centralized management of user access to network resources.
+---
 
-The system will be integrated with Flask, a Python web framework, to provide a user-friendly interface for managing the RADIUS server, configuring network policies, and monitoring user activity.
+## Technical Stack & Architecture
 
-## Features
+- **Backend:** Python + Flask (Application Factory pattern, blueprints, session security).
+- **Frontend:** HTML5 + Vanilla CSS (Custom dark-theme design system, glassmorphism, responsive flex/grid layouts, dynamic micro-animations) + Vanilla JavaScript (AJAX endpoints, Chart.js).
+- **Databases:**
+  - **RADIUS Database (`radius.db`):** Standard FreeRADIUS-compliant SQLite schema containing `radcheck`, `radreply`, `radusergroup`, `radpostauth`, and `radacct` tables. Direct integration ready for local FreeRADIUS servers.
+  - **Pi-hole Database (`gravity.db`):** Interfaces with Pi-hole DNS group-based configurations to control routing access rules.
+- **Integrations:** Google Sheets API validation for student organization registration.
 
-- Secure authentication: The system ensures that only authorized users can access the network resources by validating their credentials.
-- Authorization management: It allows administrators to define and enforce access policies based on user roles and permissions.
-- Accounting and logging: The system tracks and logs network usage, providing valuable insights into user activity and resource consumption.
-- Integration with Flask: The Flask framework provides an intuitive and customizable interface for managing the RADIUS system and its configurations.
+---
 
-## Setup and Usage
+## Directory Structure
 
-Due to the proprietary nature of the code, access to this repository is restricted to authorized individuals. If you are an authorized user, follow the instructions below to set up and use the AECC-2023-Radius-System:
+```
+AECC-2023-Radius-System/
+├── run.py                          # Main launcher script
+├── config.py                       # Application configuration variables
+├── requirements.txt                # System Python dependencies
+├── radius.db                       # Local SQLite RADIUS database (auto-generated)
+├── gravity.db                      # Local SQLite Pi-hole database (auto-generated mock)
+└── app/                            # Core application package
+    ├── __init__.py                 # Flask factory & database initializers
+    ├── models.py                   # Data Access Objects (DAO) for SQL queries
+    ├── routes/                     # Blueprint routing layer
+    │   ├── main.py                 # Public static web views (Home, FAQ, Store, etc.)
+    │   ├── auth.py                 # Self-service MAC registration/detection wizard
+    │   └── admin.py                # Administration control cockpit & REST APIs
+    ├── services/                   # Business integration layer
+    │   ├── google_sheets.py        # Student credentials sheets validator
+    │   ├── pihole.py               # Pi-hole group access manager
+    │   └── radius.py               # RADIUS logs & session simulators
+    ├── static/                     # Assets & frontend styles
+    │   ├── css/style.css           # Premium vanilla CSS design system
+    │   ├── js/main.js              # Global dynamic behaviors
+    │   ├── js/dashboard.js         # Cockpit interactive AJAX logic
+    │   └── images/                 # Event photos & organization logos
+    └── templates/                  # Reusable HTML5 templates
+```
 
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies by following the instructions in the project's documentation.
-3. Configure the system settings, such as network policies, authentication methods, and logging options.
-4. Run the Flask application to start the RADIUS system and access the management interface.
+---
 
-Please note that access to this repository and the usage of the AECC-2023-Radius-System are subject to the authorization and guidelines provided by the AECC.
+## Setup and Quick Start
 
-## Contributing
+### 1. Prerequisites
 
-As this is a private repository, contributions from external individuals are not accepted. However, if you are an authorized contributor, please follow the internal guidelines and processes for making contributions to the AECC-2023-Radius-System.
+Make sure you have Python 3 installed. Install the required system packages:
 
-## License
+```bash
+pip install -r requirements.txt
+```
 
-The licensing information for the AECC-2023-Radius-System is not provided in this repository. Please refer to the AECC's guidelines and licensing agreements for the usage and distribution of this system.
+### 2. Local Development / Simulation Mode
+
+If you run the application without Google Sheets credentials or a running Pi-hole instance, the system will **automatically initialize in Local Simulation Mode**:
+- Creates `radius.db` and a dummy `gravity.db` database inside the project root.
+- Seeds them with initial test users, simulated RADIUS authentication logs, and session statistics.
+- Validates logins with test student IDs: e.g., ID: `12345` / Phone: `555-5555` or ID: `802111222` / Phone: `7875551234`.
+
+### 3. Launching the Portal
+
+Start the Flask server:
+
+```bash
+python run.py
+```
+
+Open your browser and navigate to:
+- **Public Portal & Registration:** [http://localhost:8080](http://localhost:8080)
+- **Administrative Cockpit:** [http://localhost:8080/admin](http://localhost:8080/admin)
+  - *Default Admin Credentials:* Username: `admin` | Password: `aecc2026`
+
+---
+
+## Production Configurations
+
+For live deployments:
+1. Place your Google Service Account credentials JSON file named `aecc-flask2023-f18201f75c25.json` in the root folder.
+2. Edit `config.py` to point `PIHOLE_DB_PATH` to your live Pi-hole `gravity.db` file.
+3. Configure your local FreeRADIUS `mods-enabled/sql` module to read from the generated sqlite database `radius.db`.

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Activities & Workshops{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <h1 style="font-size: 2.6rem; text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+        Upcoming Activities
+    </h1>
+
+    <div style="display: flex; flex-direction: column; gap: 1.8rem;">
+        
+        <div class="card" style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+            <div style="background: var(--bg-surface-elevated); padding: 1.2rem; border-radius: var(--border-radius-sm); text-align: center; min-width: 100px;">
+                <span style="display: block; font-size: 1.8rem; font-weight: 800; color: var(--primary);">OCT</span>
+                <span style="display: block; font-size: 0.9rem; text-transform: uppercase;">18</span>
+            </div>
+            <div style="flex: 1;">
+                <span class="badge badge-active" style="margin-bottom: 0.5rem;">Workshop</span>
+                <h3>Introduction to Git & GitHub Workflow</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.4rem; font-size: 0.95rem;">
+                    Learn version control fundamentals, branch management, code merging, and pull requests in the AECC Computer Lab. Bring your laptops!
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+            <div style="background: var(--bg-surface-elevated); padding: 1.2rem; border-radius: var(--border-radius-sm); text-align: center; min-width: 100px;">
+                <span style="display: block; font-size: 1.8rem; font-weight: 800; color: var(--secondary);">NOV</span>
+                <span style="display: block; font-size: 0.9rem; text-transform: uppercase;">04</span>
+            </div>
+            <div style="flex: 1;">
+                <span class="badge badge-active" style="background: var(--secondary-glow); color: var(--secondary); border-color: rgba(0,150,255,0.2); margin-bottom: 0.5rem;">Seminar</span>
+                <h3>Industry Recruiter Mock Interviews</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.4rem; font-size: 0.95rem;">
+                    Get direct feedback on your resume structure and coding skills with software engineers and recruiters from leading tech corporations.
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+            <div style="background: var(--bg-surface-elevated); padding: 1.2rem; border-radius: var(--border-radius-sm); text-align: center; min-width: 100px;">
+                <span style="display: block; font-size: 1.8rem; font-weight: 800; color: var(--warning);">DEC</span>
+                <span style="display: block; font-size: 0.9rem; text-transform: uppercase;">12</span>
+            </div>
+            <div style="flex: 1;">
+                <span class="badge badge-pending" style="margin-bottom: 0.5rem;">Hackathon</span>
+                <h3>Local AECC Programming Challenge 2026</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.4rem; font-size: 0.95rem;">
+                    Compete in teams to solve computational problems under time pressure. Prizes for top teams, coffee and pizza provided.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

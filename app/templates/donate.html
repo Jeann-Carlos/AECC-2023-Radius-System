@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Donate & Sponsor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px;">
+    <div class="card" style="margin-top: 2rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;"><i class="fa fa-heart" style="color: var(--danger);"></i> Sponsor AECC</h1>
+        <p style="color: var(--text-secondary); line-height: 1.8; text-align: center; margin-bottom: 2.5rem; font-size: 1.05rem;">
+            Your sponsorship directly drives technological growth inside UPRRP. Funding supports specialized lab hardware, server infrastructure for student-hosted projects, and travel scholarships for members attending conferences across Puerto Rico and North America.
+        </p>
+
+        <h2 style="margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Sponsorship Levels</h2>
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+            <div style="background: var(--bg-input); padding: 1.2rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <strong style="font-size: 1.1rem; color: var(--primary);">Byte Sponsor</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">Logo placed on website + mention in event streams.</p>
+                </div>
+                <strong style="font-size: 1.4rem;">$100.00</strong>
+            </div>
+
+            <div style="background: var(--bg-input); padding: 1.2rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <strong style="font-size: 1.1rem; color: var(--secondary);">Kilo Sponsor</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">Resume directory sharing + Custom workshop sponsorships.</p>
+                </div>
+                <strong style="font-size: 1.4rem;">$250.00</strong>
+            </div>
+
+            <div style="background: var(--bg-input); padding: 1.2rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <strong style="font-size: 1.1rem; color: var(--warning);">Mega Sponsor (Corporate)</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">Dedicated recruiter hackathon desks + logo on annual hoodies.</p>
+                </div>
+                <strong style="font-size: 1.4rem;">$500.00+</strong>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 1.2rem;">Payment Channels</h2>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+            Individuals can make direct donations via ATH Móvil (Path: <em>/AECCUPRRP</em>) or PayPal. For corporate agreements or tax deduction credentials, please contact our directory.
+        </p>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
